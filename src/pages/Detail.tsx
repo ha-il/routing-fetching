@@ -73,6 +73,9 @@ const MoreInfo = styled.a`
   text-decoration: none;
   transition: color 0.3s;
   color: white;
+  &:hover {
+    color: #e1b12c;
+  }
 `;
 
 const FilmList = styled.ul`
