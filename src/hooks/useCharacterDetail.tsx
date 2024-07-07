@@ -9,6 +9,9 @@ export default function useCharacterDetail(id: string | undefined) {
 
   async function getChatcter() {
     const response = await fetch(`${CHARACTERS_ENDPOINT}/${id}`);
+    if (!response.ok) {
+      throw new Error("데이터를 불러오는 데 실패했습니다.");
+    }
     const data: Character = await response.json();
     setCharacter(data);
   }

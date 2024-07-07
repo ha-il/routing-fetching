@@ -1,7 +1,15 @@
-interface ErrorProps {
-  message: string;
+import styled from "styled-components";
+
+export default function Error({ message }: { message: string }) {
+  return <Text>{message}</Text>;
 }
 
-export default function Error({ message }: ErrorProps) {
-  return <div>{message}</div>;
-}
+const Text = styled.div`
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-weight: 700;
+  font-size: 2rem;
+`;

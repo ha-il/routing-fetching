@@ -41,3 +41,17 @@ export default function useLoadingAndError(f: () => Promise<void>) {
   return { loading, error };
 }
 ```
+
+## 2. 잘못된 경로로의 에러처리
+
+- fetch가 실패한 경우
+
+만약 주소창을 통해 '/asd'로 접근한다면 `asd로는 조회가 불가능합니다! 😭`라는 메시지를 띄웁니다.
+
+- fetch는 성공했지만 데이터가 없는 경우
+
+만약 주소창을 통해 '/1000000000'로 접근한다면 `1000000000로 조회된 캐릭터가 없습니다 😢`라는 메시지를 띄웁니다.
+
+## 3. imgURL이 undefined인 경우
+
+- 자체적으로 만든 404 이미지가 뜨도록 했습니다.
