@@ -1,26 +1,20 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Character } from "../types";
 import { CHARACTERS_ENDPOINT } from "../constants";
-import { handleErrorAsync } from "../utils/handleErrorAsync";
+import useLoadingAndError from "./useLoadingAndError";
 
 export default function useCharacters() {
   const [characters, setCharacters] = useState<Character[]>([]);
+  const { loading, error } = useLoadingAndError(getChatcters);
 
-  useEffect(() => {
-    async function getChatcters() {
-      const response = await fetch(CHARACTERS_ENDPOINT);
-      const data: Character[] = await response.json();
-      setCharacters(data);
+  async function getChatcters() {
+    const response = await fetch(CHARACTERS_ENDPOINT);
+    if (!response.ok) {
+      throw new Error("데이터를 불러오는 데 실패했습니다.");
     }
-    // async function getChatcter() {
-    //   const fakeID = "168";
+    const data: Character[] = await response.json();
+    setCharacters(data);
+  }
 
-    //   const response = await fetch(`${CHARACTERS_ENDPOINT}/${fakeID}`);
-    //   const data: Character = await response.json();
-
-    //   console.log(data);
-    // }
-    handleErrorAsync(getChatcters);
-  }, []);
-  return characters;
+  return { characters, loading, error };
 }
